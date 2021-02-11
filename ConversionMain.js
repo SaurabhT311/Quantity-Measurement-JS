@@ -1,11 +1,9 @@
 let Util = require('../Conversion/conversion');
-// var Promise = require('promise');
 var readlineSync = require('readline-sync');
 
-const { mToKm, display } = require('../Conversion/conversion');
 
 class ConversionMain {
-   async quantity() {
+    async quantity() {
         var choice = readlineSync.question(`Welcome to Quantity Measurement 
         L -> for length operation 
         V -> for volume
@@ -31,16 +29,14 @@ class ConversionMain {
                             case "km":
                                 let value = readlineSync.question("Enter the data you want to convert: ");
                                 try {
-                                   await Util.mToKm(value).then((resolve) => {
-                                       console.log(resolve);
+                                    await Util.mToKm(value).then((resolve) => {
+                                        console.log(resolve);
                                         //  return resolve;
 
                                     }).catch((error) => {
-                                         console.log(error);
-                                        //  return error;
-                                        // throw "error";
+                                        console.log(error);
                                     });
-                                    // console.log(manswer + " km");
+
                                 } catch (error) {
                                     console.log(error);
                                 }
@@ -55,7 +51,9 @@ class ConversionMain {
 
                             default:
                                 console.log("Enter valid option");
+                                break;
                         }
+
 
                     case "km":
                         let kmValue = readlineSync.question(`Enter the choice you want to convert INTO 
@@ -78,6 +76,7 @@ class ConversionMain {
 
                             default:
                                 console.log("Enter Valid option");
+                                break;
                         }
 
                     case "ft":
@@ -105,10 +104,10 @@ class ConversionMain {
 
                     default:
                         console.log("Enter valid option");
-                
-                    }
-                    break;
-                
+
+                }
+                break;
+
             case "V":
                 var operation = readlineSync.question(`Enter the choice you want to convert FROM : 
                 lt-> for liter  
@@ -126,13 +125,13 @@ class ConversionMain {
                         switch (liValue) {
                             case "ga":
                                 let value = readlineSync.question("Enter the data you want to convert: ");
-                                let answer = Util.liToGallons(value);
+                                let answer = Util.ltToGallons(value);
                                 console.log(answer + " liquid gallons");
                                 break;
 
                             case "ml":
                                 let mlValue = readlineSync.question("Enter the data you want to convert: ");
-                                let mlAnswer = Util.liToMl(mlValue);
+                                let mlAnswer = Util.ltToMl(mlValue);
                                 console.log(mlAnswer + " ml");
                                 break;
 
@@ -172,8 +171,17 @@ class ConversionMain {
                         switch (mlValue) {
                             case "lt":
                                 let value = readlineSync.question("Enter the data you want to convert: ");
-                                let answer = Util.mlToLitres(value);
-                                console.log(answer + " lt.");
+                                try {
+                                    await Util.mlToLitres(value).then((resolve) => {
+                                        console.log(resolve);
+
+                                    }).catch((error) => {
+                                        console.log(error);
+                                    });
+
+                                } catch (error) {
+                                    console.log(error);
+                                }
                                 break;
 
                             case "ga":
@@ -186,10 +194,97 @@ class ConversionMain {
                                 console.log("Enter valid option");
                         }
 
-                    default:
-                        console.log("Enter valid option");
                 }
+
                 break;
+
+            case "T":
+                var operation = readlineSync.question(`Enter the choice you want to convert FROM : 
+                C-> for Celcius  
+                K-> for Kelvin  
+                F-> for Fahrenheit 
+                Enter you choice: `);
+
+                switch (operation) {
+                    case "C":
+                        let CValue = readlineSync.question(`Enter the choice you want to convert INTO 
+                        K-> into Kelvin 
+                        F-> into Fahrenheit 
+                        Enter your choice: `);
+
+                        switch (CValue) {
+                            case "K":
+                                let value = readlineSync.question("Enter the data you want to convert: ");
+                                try {
+                                    await Util.cToKelvin(value).then((resolve) => {
+                                        console.log(resolve);
+
+                                    }).catch((error) => {
+                                        console.log(error);
+                                    });
+                                } catch (error) {
+                                    console.log(error);
+                                }
+                                break;
+
+                            case "F":
+                                let Fvalue = readlineSync.question("Enter the data you want to convert: ");
+                                let Fanswer = Util.cToFahrenheit(Fvalue);
+                                console.log(Fanswer + " F");
+                                break;
+
+                            default:
+                                console.log("Enter valid option");
+                        }
+
+                    case "K":
+                        let KValue = readlineSync.question(`Enter the choice you want to convert INTO 
+                        C-> into Degree 
+                        F-> into Fahrenheit 
+                        Enter your choice: `);
+
+                        switch (KValue) {
+                            case "C":
+                                let value = readlineSync.question("Enter the data you want to convert: ");
+                                let answer = Util.kToCelcius(value);
+                                console.log(answer + " K");
+                                break;
+
+                            case "F":
+                                let Fvalue = readlineSync.question("Enter the data you want to convert: ");
+                                let Fanswer = Util.kToFahrenheit(Fvalue);
+                                console.log(Fanswer + " F");
+                                break;
+
+                            default:
+                                console.log("Enter valid option");
+                        }
+
+                    case "F":
+                        let FValue = readlineSync.question(`Enter the choice you want to convert INTO 
+                        C-> into Degree 
+                        K-> into Kelvin 
+                        Enter your choice: `);
+
+                        switch (FValue) {
+                            case "C":
+                                let value = readlineSync.question("Enter the data you want to convert: ");
+                                let answer = Util.fToCelcius(value);
+                                console.log(answer + " C");
+                                break;
+
+                            case "K":
+                                let Kvalue = readlineSync.question("Enter the data you want to convert: ");
+                                let Kanswer = Util.fToKelvin(Kvalue);
+                                console.log(Kanswer + " K");
+                                break;
+
+                            default:
+                                console.log("Please enter valid option");
+                        }
+                        break;
+                }
+
         }
 
     }
